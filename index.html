@@ -23,6 +23,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- ===================== META PIXEL ===================== -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1024059546851950');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1024059546851950&ev=PageView&noscript=1"
+/></noscript>
+<!-- ===================== FIM META PIXEL ===================== -->
+
 <style>
 /* =========================================================
    VARIÁVEIS GLOBAIS DE DESIGN (cores, raio, sombras)
@@ -998,8 +1016,8 @@ footer{ border-top:1px solid var(--border); background:var(--card); }
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg><span>Acesso vitalício</span></li>
         </ul>
         <div class="plan-price">
-          <p class="old">De R$ 87,90</p>
-          <p class="new">R$ 24,90</p>
+          <p class="old">De 690 MT</p>
+          <p class="new">197 MT</p>
           <p class="note">pagamento único</p>
           <!-- BOTÃO CTA: plano básico -->
           <button type="button" class="plan-btn" data-cta="plano-basico">Comprar oferta básica</button>
@@ -1053,10 +1071,10 @@ footer{ border-top:1px solid var(--border); background:var(--card); }
             <span>Oferta termina em</span>
             <span class="num timer-value">17:34</span>
           </div>
-          <p class="old">De R$ 127,90</p>
+          <p class="old">De 1090 MT</p>
           <p class="label">Hoje por apenas</p>
-          <p class="new">R$ 34,90</p>
-          <p class="installment">ou 3x de R$ 11,63 no cartão</p>
+          <p class="new">297 MT</p>
+          <p class="installment">ou 3x de 99 MT no cartão</p>
           <p class="discount-pill">⚡ 71% OFF — Resta pouco tempo!</p>
         </div>
 
@@ -1149,7 +1167,7 @@ footer{ border-top:1px solid var(--border); background:var(--card); }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
         </button>
         <div class="faq-answer"><div class="faq-answer-inner">
-          <p>É pagamento único. Você paga R$ 34,90 uma única vez e tem acesso vitalício ao aplicativo e a todas as atualizações futuras, sem mensalidades e sem taxas extras.</p>
+          <p>É pagamento único. Você paga 297 MT uma única vez e tem acesso vitalício ao aplicativo e a todas as atualizações futuras, sem mensalidades e sem taxas extras.</p>
         </div></div>
       </div>
 
@@ -1265,7 +1283,7 @@ footer{ border-top:1px solid var(--border); background:var(--card); }
      - Preencha com o link real do seu checkout / pagamento.
      ----------------------------------------------------------- */
   var CONFIG = {
-    checkoutUrl: "#oferta", // TODO: substituir pelo link real de checkout
+    checkoutUrl: "https://checkout.escalepay.com/6380028", // Link de checkout (Escalepay) — mesmo link para os planos Básico e Premium
     // Duração do contador regressivo (minutos). Reinicia ao expirar,
     // como costuma ocorrer em ofertas "sempre ativas".
     countdownMinutes: 17,
@@ -1395,9 +1413,8 @@ footer{ border-top:1px solid var(--border); background:var(--card); }
       if (btn.tagName === "A") { return; } // já é link, mantém href original
       btn.addEventListener("click", function () {
         var offerType = btn.getAttribute("data-cta");
-        // Espaço reservado para eventos de conversão (Pixel, GTM, GA4, etc.)
-        // Exemplo:
-        // if (window.fbq) { fbq('track', 'Lead', { content_name: offerType }); }
+        // Evento de conversão do Meta Pixel
+        if (window.fbq) { fbq('track', 'InitiateCheckout', { content_name: offerType }); }
         // if (window.gtag) { gtag('event', 'generate_lead', { cta: offerType }); }
         window.location.href = CONFIG.checkoutUrl;
       });
